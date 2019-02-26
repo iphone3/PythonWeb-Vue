@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>01-Vue基本使用</title>
+		<!-- 1、引入Vue库 [类似于JQ] -->
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	</head>
+	
+	<body>
+		<!-- 2、创建一个DIV -->
+		<div id="app">
+			<!-- 4、使用(Vue的模板的绑定数据的方法，可以用两对花括号进行绑定Vue中的数据对象的属性) -->
+			{{ name }}: "{{msg}} "
+			
+			<p v-bind:title="message">hello python!</p>
+		</div>
+		
+	</body>
+	
+	<script>
+		// 3、创建Vue对象
+		var app = new Vue({
+			el: '#app',	// el属性：把当前Vue对象挂载到 id为app的标签中 (#app是id选择器)
+			data: {		// Vue对象中绑定的数据
+				msg: 'hello Vue',	// 自定义的数据
+				name: 'Atom',		// 自定义的数据
+				message: '页面加载于 ' + new Date().toLocaleString()
+			}
+		})
+	</script>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>02-模板指令</title>
+		<style>
+			h1{
+				background: red;
+				color: white;
+			}
+			.blue{
+				color: blue;
+			}
+			.purple{
+				color: purple;
+			}
+			
+			.view{
+				width: 300px;
+				height: 30px;
+				border: 1px solid gray;
+				line-height: 30px;
+				text-align: center;
+			}
+			.active{
+				background: blue;
+				color: white;
+			}
+		</style>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	</head>
+	
+	<body>
+		<div id="app">
+			<h1>1、数据渲染 v-text、v-html、{{}}</h1>
+			<p v-text="title1"></p>
+			<p v-html="title1"></p>
+			<p v-text="title2"></p>
+			<p v-html="title2"></p>
+			<p>{{title1}}</p>
+			<hr>
+			
+			<h1>2、控制模块显示隐藏 v-if、v-show</h1>
+			<p v-if="isShow">{{title3}}</p>
+			<p v-show="isShow">{{title3}}</p>
+			<hr>
+			
+			<h1>3、渲染循环列表 v-for</h1>
+			<ul>
+				<li v-for="item in list">
+					{{item.text}}
+				</li>
+			</ul>
+			<ul>
+				<li v-for="(item, index) in list">
+					第{{index+1}}个-{{item.text}}
+				</li>
+			</ul>
+			<hr>
+			
+			<h1>4、事件绑定 v-on</h1>
+			<p v-on:click="speak1">点我试试看</p>
+			<p @click="speak2">再点我试试看</p>
+			<hr>
+			
+			<h1>5、属性绑定 v-bind</h1>
+			<img v-bind:src="vuelog" style="width: 60px;">
+			<br>
+			<img :src="vuelog" style="width: 60px;">
+			<br>
+			<p :class="showColor">小猪佩奇画上手,我们都是社会人!</p>
+			<hr>
+			
+			<h1>6、样式绑定 v-bind </h1>
+			<p class="view" :class="{active:isActive}">{{title1}}</p>
+			<hr>
+			
+			<h1>7、双向数据绑定 v-model</h1>
+			<p>
+				输入框: <input type="text" v-model="message">  
+			</p>
+			<p class="blue">
+				我跟你说: {{message}}
+			</p>
+			<hr>
+		</div>
+	</body>
+	
+	<script type="text/javascript">
+		var app = new Vue({
+			el: '#app',
+			data: {
+				title1: 'hello vue!',
+				title2: 'TOMVC <sub>2.0</sub>',
+				title3: '我在哪里呢?',
+				isShow: true,
+				list: [  // 数组
+					{text: '01、HTML'},
+					{text: '02、CSS'},
+					{text: '03、JavaScript'}
+				],
+				vuelog: 'https://cn.vuejs.org/images/logo.png',
+				showColor: 'purple',
+				isActive: true,
+				message: 'hello world!'
+			},
+			methods: {
+				speak1: function(){
+					alert('我很帅是不是?')
+				},
+				speak2: function(){
+					alert('这是必须的!')
+				}
+			}
+		})
+	</script>
+</html>

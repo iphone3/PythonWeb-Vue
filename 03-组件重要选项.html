@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>03、组件中重要选项</title>
+		<style type="text/css">
+			.num{
+				display: inline-block;
+				width: 20px;
+				text-align: center;
+			}
+		</style>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	</head>
+	
+	<body>
+		<div id="app">
+			<p @click="speak">
+				{{msg}}
+			</p>
+			
+			<p>
+				商品价格: ￥{{price}}
+			</p>
+			<p>
+				库存: {{stock}} 件
+			</p>
+			<p>
+				商品数量:
+				<button @click="sub">-</button>
+				<span class="num">{{num}}</span>
+				<button @click="add">+</button>
+			</p>
+			<p>
+				总金额: ￥{{sumPrice}}
+			</p>
+			<p>
+				优惠: {{showStr}}
+			</p>
+		</div>
+		
+		<script type="text/javascript">
+			var app = new Vue({
+				el: '#app',
+				data: {	// 数据选项
+					msg: 'hello vue!',
+					num: 0,	// 购买数量
+					price: 10,	// 商品价格
+					stock: 15,	// 商品库存
+				},
+				methods: {	// 方法选项
+					speak: function(){
+						alert('你好!')
+					},
+					add: function(){
+						this.num++
+					},
+					sub: function(){
+						this.num--
+					}
+				},
+				computed: {	// 计算属性
+					// 总金额，可以将属性设置为计算属性 [计算属性也是属性，只不过带有计算功能]
+					sumPrice: function(){
+						return this.price * this.num
+					},
+					showStr: function(){
+						// 假如大于100有优惠
+						if(this.sumPrice >= 100){
+							return '包邮!'
+						} else {
+							return '不包邮!'
+						}
+					}
+				},
+				watch: { // 监听选项
+					// 个数问题处理,可以监听num的变化
+					num: function(newvalue, oldvalue){	// 可以监听到新值和旧值
+						if(newvalue < 0 || newvalue > 15){
+							this.num = oldvalue
+						}
+					}
+				},
+			})
+		</script>
+	</body>
+</html>

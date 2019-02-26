@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	
+	<body>
+		<div id="app">
+			<p>
+				商品价格: ￥{{price}}
+			</p>
+			<p>
+				库存: {{stock}}
+			</p>
+			<p>
+				商品数量: 
+				<button @click="sub">-</button>
+				<span> {{num}} </span> 
+				<button @click="add">+</button>
+			</p>
+			<p>
+				总金额: {{sumprice}}
+			</p>
+			<p>
+				优惠: {{showstr}}
+			</p>
+		</div>
+	</body>
+	
+	<script type="text/javascript">
+		var app = new Vue({
+			el: '#app', 
+			data: {	// data数据选项
+				num: 0,	// 购买数量
+				price: 10,	// 商品价格
+				stock: 15,	// 库存
+			},
+			methods:{	// methods方法选项
+				add: function(){
+					// this 
+					this.num++ 
+				},
+				sub: function(){
+					this.num--
+				}
+			},
+			computed: {	// computed 计算属性
+				sumprice: function(){
+					return this.num * this.price
+				},
+				showstr: function(){
+					if(this.sumprice >= 100){
+						return '包邮'
+					} else {
+						return '不包邮'
+					}
+				}
+			},
+			watch: {	// watch监听选项
+				num: function(newvalue, oldvalue){
+					if(newvalue<0 || newvalue>15){
+						this.num = oldvalue
+					}
+				}
+			}
+		})
+	</script>
+</html>
